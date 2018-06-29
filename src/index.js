@@ -24,18 +24,20 @@ class App extends React.Component<{}> {
               styles: customStyles,
             }}
           >
-            <li>
-              <span>item</span>
-            </li>
-            <li>
-              <span>item</span>
-            </li>
-            <li>
-              <span>item</span>
-            </li>
-            <li>
-              <span>item</span>
-            </li>
+            <ul>
+              <li>
+                <span>item</span>
+              </li>
+              <li>
+                <span>item</span>
+              </li>
+              <li>
+                <span>item</span>
+              </li>
+              <li>
+                <span>item</span>
+              </li>
+            </ul>
           </Dropdown>
         </Nav>
         <div style={{ marginTop: 80 }}>
