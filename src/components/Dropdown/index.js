@@ -75,7 +75,7 @@ export default class Dropdown extends React.Component<tProps, tState> {
           leave={{ opacity: 0 }}
           keys={this.state.items.map(item => item.id)}
         >
-          {this.state.items.map(item => styles => (
+          {this.state.items.map(() => styles => (
             <animated.div style={styles}>
               <span className="triangle" />
               <ul>{children}</ul>
