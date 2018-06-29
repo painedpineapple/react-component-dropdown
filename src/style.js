@@ -7,3 +7,11 @@ export const P = styled('p')(() => ({
   fontSize: 18,
   margin: 30,
 }))
+
+export const Nav = styled('nav')({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  position: 'relative',
+  width: '100%',
+})

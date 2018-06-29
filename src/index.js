@@ -3,18 +3,41 @@ import { render } from 'react-dom'
 import faker from 'faker'
 import _ from 'lodash'
 //
-import Component from './Component'
-import customStyles, { P } from './style'
+import Dropdown from './components/Dropdown'
+import customStyles, { P, Nav } from './style'
 
 class App extends React.Component<{}> {
+  state = {
+    menuIsActive: false,
+  }
+  toggleMenu = () =>
+    this.setState(prevState => ({ menuIsActive: !prevState.menuIsActive }))
   render() {
     return (
       <div>
-        <Component
-          options={{
-            styles: customStyles,
-          }}
-        />
+        <Nav>
+          <button onClick={this.toggleMenu}>Toggle Dropdown</button>
+          <Dropdown
+            options={{
+              isActive: this.state.menuIsActive,
+              toggleIsAcitve: this.toggleMenu,
+              styles: customStyles,
+            }}
+          >
+            <li>
+              <span>item</span>
+            </li>
+            <li>
+              <span>item</span>
+            </li>
+            <li>
+              <span>item</span>
+            </li>
+            <li>
+              <span>item</span>
+            </li>
+          </Dropdown>
+        </Nav>
         <div style={{ marginTop: 80 }}>
           {_.times(20, () => (
             <P key={faker.random.uuid()}>{faker.lorem.paragraph()}</P>
