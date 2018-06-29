@@ -3,8 +3,6 @@ import { Transition, animated } from 'react-spring'
 //
 import Container from './index.style'
 
-const AnimatedContainer = animated(Container)
-
 type tProps = {
   children: any,
   options: {
@@ -14,27 +12,32 @@ type tProps = {
   },
 }
 
-type tState = {}
+type tState = {
+  items: Array<{ id: string }>,
+}
 
 export default class Dropdown extends React.Component<tProps, tState> {
+  state = {
+    items: [],
+  }
   containerRef: any
   componentDidMount() {}
   componentWillUnmount() {
-    this.addClickListener()
+    this.activateMenu()
   }
   componentDidUpdate(prevProps) {
     if (this.props.options.isActive !== prevProps.options.isActive) {
-      this.props.options.isActive
-        ? this.addClickListener()
-        : this.removeClickListener()
+      this.props.options.isActive ? this.activateMenu() : this.deactivateMenu()
     }
   }
-  addClickListener = () => {
+  activateMenu = () => {
+    this.setState({ items: [{ id: 'dropdown' }] })
     if (typeof document !== 'undefined') {
       document.addEventListener('click', this.outsideClickListener)
     }
   }
-  removeClickListener = () => {
+  deactivateMenu = () => {
+    this.setState({ items: [] })
     if (typeof document !== 'undefined') {
       document.removeEventListener('click', this.outsideClickListener)
     }
@@ -70,25 +73,16 @@ export default class Dropdown extends React.Component<tProps, tState> {
           from={{ opacity: 0 }}
           enter={{ opacity: 1 }}
           leave={{ opacity: 0 }}
+          keys={this.state.items.map(item => item.id)}
         >
-          {isActive && (
-            <animated.div>
+          {this.state.items.map(() => styles => (
+            <animated.div style={styles}>
               <span className="triangle" />
-              {children}
+              <div>{children}</div>
             </animated.div>
-          )}
+          ))}
         </Transition>
       </Container>
     )
   }
 }
-
-// {
-//   styles =>
-//   isActive && (
-//     <animated.div style={styles}>
-//       <span className="triangle" />
-//       <ul>{children}</ul>
-//     </animated.div>
-//   )
-// }

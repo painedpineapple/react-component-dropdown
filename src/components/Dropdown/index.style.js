@@ -27,7 +27,7 @@ export default styled('div')(({ options: o }) => ({
     transform: 'translateY(-100%)',
   },
 
-  ul: {
+  '> div': {
     margin: 0,
     background: `rgb(${color.white[0]})`,
     boxShadow: '2px 2px 16px rgba(0, 0, 0, 0.15)',
